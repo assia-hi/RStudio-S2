@@ -56,3 +56,53 @@ class(mois)
 mois[c(1,2,3)]
 
 #faire le 10
+
+# TD1 - Exo 3
+
+rm(list=ls())
+
+vec_1 = runif(n=5,min=0,max=1)
+vec_1
+mean(vec_1)
+median(vec_1)
+min(vec_1)
+max(vec_1)
+
+seq_1 = runif(10, -5, 5)
+seq_1
+mean(seq_1)
+median(seq_1)
+min(seq_1)
+max(seq_1)
+
+ech_1 = runif(100, 10, 20)
+ech_1
+mean(ech_1)
+median(ech_1)
+min(ech_1)
+max(ech_1)
+
+seq_2 = runif(15, 50, 100)
+seq_2
+mean(seq_2)
+median(seq_2)
+min(seq_2)
+max(seq_2)
+
+ech_2 = rnorm(20,-2,3)
+moyenne = mean(ech_2)
+ecart_type = sd(ech_2)
+print(paste("moyenne : ", moyenne))
+print(paste("ecart-type : ", ecart_type))
+hist(ech_2)
+
+ech_3 = rnorm(2000, 0, 1)
+ech_3_moyenne = mean(ech_3)
+ech_3_sd = sd(ech_3)
+print(paste("moyenne : ", ech_3_moyenne))
+print(paste("ecart-typde : ", ech_3_sd))
+hist(ech_3)
+
+quantile(ech_3, c(0.25))
+quantile(ech_3, c(0.50))  
+quantile(ech_3, c(0.75))
