@@ -1,0 +1,108 @@
+#TP1
+
+#------------------
+
+#Exo 1
+
+#1 récupérer un jeu de données
+data(iris)
+class(iris)
+
+# voir les données
+View(data)
+
+ 
+nrow(iris)
+ncol(iris)
+colnames(iris)
+summary(iris)
+
+iris[c("Sepal.Length", "Species")]
+
+#si on veut des lignes en particulier, définir les colonnes puis lignes
+iris[][ c(100,103,105), ]
+
+#pour afficher ligne x à ligne y 
+iris[50:100, ]
+
+mean(iris$Sepal.Length)
+median(iris$Sepal.Width)
+
+sd(iris$Petal.Length)
+quantile(iris$Petal.Width, seq(0.1,0.9,0.1))
+
+#Fin de l'exo 1
+
+#-------------------
+
+# Exo 2
+
+dfmanga = read.csv("C:/Users/ahidat/Downloads/manga.csv", header = TRUE, sep = ",", dec = ".")
+dfanime = read.csv("C:/Users/ahidat/Downloads/anime.csv", header = TRUE, sep = ",", dec = ".")
+class(dfmanga)
+class(dfanime)
+
+View(dfmanga)
+View(dfanime)
+
+dim(dfmanga)
+dim(dfanime)
+
+mean(dfmanga$Score)
+mean(dfanime$Score) #anime sont mieux notés
+
+sum(dfmanga$Vote)
+sum(dfanime$Vote) #anime ont plus de notes
+
+sd(dfmanga$Score)
+sd(dfanime$Score) #score des mangas sont plus homogènes
+
+quantile(dfmanga$Score, seq(0.1,0.9,0.1))
+quantile(dfanime$Score, seq(0.1,0.9,0.1)) #anime a un décile 1 plus petit que manga
+
+ext_manga1 = subset(dfmanga, Score > 9)
+nrow(ext_manga1)
+
+ext_manga2 = subset(dfmanga, Vote >= 200000)
+nrow(ext_manga2)
+
+ext_manga3 = subset(dfmanga, Vote > 200000 & Score >= 8)
+nrow(ext_manga3)
+
+ext_manga4 = subset(dfmanga, Score >= 7 & Score <= 8)
+nrow(ext_manga4)
+
+eff_Rating = table(dfanime$Rating)
+print(eff_Rating)
+length(eff_Rating)
+prop.table(eff_Rating)
+
+ext_anime1 = subset(dfanime, Rating == "R - 17+ (violence & profanity)")
+nrow(ext_anime1)
+
+ext_anime2 = subset(dfanime, Rating == "R - 17+ (violence & profanity)" & Score >= 8)
+nrow(ext_anime2)
+
+ext_anime3 = subset(dfanime, Rating != "R - 17+ (violence & profanity)")
+nrow(ext_anime3)
+
+ext_anime4 = subset(dfanime, Rating %in% c("PG - Children", "G - All Ages"))
+nrow(ext_anime4)
+
+ext_anime5 = subset(dfanime, !Rating %in% c("PG - Children", "G - All Ages"))
+nrow(ext_anime5)
+
+ext_anime6 = subset(dfanime, Vote >= 400000 | Score >= 9)
+nrow(ext_anime6)
+
+dfmanga = dfmanga[ , c("Title","Score","Vote","Ranked")]
+dfanime = dfanime[ , c("Title","Score","Vote","Ranked")]
+
+dfmanga$Type = "Manga"
+dfanime$Type = "Anime"
+
+dfconcat = rbind(dfmanga,dfanime)
+View(dfconcat)
+
+write.table(x = dfconcat, file = ".../.../.../ExportTp1.csv",
+            sep = ";",row.names = FALSE) #Poser qst au prochain TP
