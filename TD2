@@ -1,0 +1,102 @@
+#Exo 1
+
+karts = read.csv("L:/BUT/SD/Promo 2025/ahidat/R/dataset/bodies_karts.csv", header = TRUE, dec = ",", sep =";")
+drivers = read.csv("L:/BUT/SD/Promo 2025/ahidat/R/dataset/drivers.csv", header = TRUE, dec = ",", sep =";")
+gliders = read.csv("L:/BUT/SD/Promo 2025/ahidat/R/dataset/gliders.csv", header = TRUE, dec = ".", sep ="|")
+tires = read.csv("L:/BUT/SD/Promo 2025/ahidat/R/dataset/tires.csv", header = TRUE, dec = ",", sep ="\t")
+
+getwd()
+setwd("L:/BUT/SD/Promo 2025/ahidat/R/TD2")
+
+dim(karts)
+dim(drivers)
+dim(gliders)
+dim(tires)
+
+
+#Exo 2
+
+summary(karts)
+summary(drivers)
+summary(gliders)
+summary(tires)
+
+plot(x = drivers$Weight, y = drivers$Acceleration, xlab = "Poids", ylab = "Acceleration", main = "Nuage de points")
+
+cor_poids_acc = cor(x = drivers$Weight, y = drivers$Acceleration, method = "spearman")
+
+cov_poids_acc = cov(x = drivers$Weight,
+            y = drivers$Acceleration)
+sX = sd(drivers$Weight)
+sY = sd(drivers$Acceleration)
+cor_poids_acc_formule = cov_poids_acc / (sX*sY)
+
+coefCorr = cor(x = drivers$Weight,
+               y = drivers$Acceleration)
+coefDeter = coefCorr^2
+print(coefDeter)
+#appuie analyse -> coef de cor au carré, 0 = pas de lien et 1 = lien +++
+
+
+matriceCor_drivers = cor(drivers[ , - 1]) #matrice des corrélations, toutes les variables sauf la 1
+matriceCor_drivers = round(matriceCor_drivers , 2)
+View(matriceCor_drivers)
+#Toutes les variables semblent fortement corrélées entre elles.
+
+#commande à executer qu'une seule fois
+install.packages("corrplot")
+
+library(corrplot) #je charge mon package pour pouvoir utiliser ses fonctionalités
+corrplot(matriceCor_drivers, method="circle")
+
+matriceCor_gliders = cor(gliders[ , - 1]) 
+matriceCor_gliders = round(matriceCor_gliders , 1)
+View(matriceCor_gliders)
+
+#ou matriceCor = round(cor(gliders[ , - 1]),1)
+corrplot(matriceCor_gliders, method="color",  
+         type="upper", order="hclust", 
+         addCoef.col = "black", # Ajout du coefficient de corrélation
+         tl.col="black", tl.srt=45, #Rotation des étiquettes de textes
+         # Cacher les coefficients de corrélation sur la diagonale
+         diag=FALSE )
+
+matriceCor_tires = cor(tires[ , - 1]) 
+matriceCor_tires = round(matriceCor_tires , 1)
+View(matriceCor_tires)
+
+corrplot(matriceCor_tires, method="color",  
+         type="upper", order="hclust", 
+         addCoef.col = "black", # Ajout du coefficient de corrélation
+         tl.col="black", tl.srt=45, #Rotation des étiquettes de textes
+         # Cacher les coefficients de corrélation sur la diagonale
+         diag=FALSE )
+
+matriceCor_karts = cor(karts[ , - 1]) 
+matriceCor_karts = round(matriceCor_karts , 1)
+View(matriceCor_karts)
+
+corrplot(matriceCor_karts, method="color",  
+         type="upper", order="hclust", 
+         addCoef.col = "black", # Ajout du coefficient de corrélation
+         tl.col="black", tl.srt=45, #Rotation des étiquettes de textes
+         # Cacher les coefficients de corrélation sur la diagonale
+         diag=FALSE )
+
+# Exo 3
+
+resultat = drivers[ , c("Driver" , "Weight")] #toutes les lignes et 2 colonnes en particulier
+View(resultat)
+
+resultat = drivers[ 1:10, c("Driver" , "Weight")]
+View(resultat)
+
+resultat = drivers[, c(-5,-7,-9)]
+View(resultat)
+
+resultat = drivers[, -c(2,3)]
+View(resultat)
+
+#ou resultat = drivers[ , -c("Weight","Acceleration")], uniquement sur indices numériques
+
+resultat = drivers[, c("Driver" , "Acceleration","Weight")]
