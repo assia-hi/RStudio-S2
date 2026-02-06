@@ -1,6 +1,10 @@
 #notes de cours: setwd ou 
 #session -> set directory -> choisir directory et choisir dossier dans lequel on travaille
 #df = read.csv(file=, header=, sep=, dec=)
+#filtre = subset (df, condition
+#tri = order renvoie des numéros de lignes -> d'abord on trie les lignes dans une variable, puis on accèdaux lignes intéressantes  
+#OU = |
+
 
 setwd("C:/Users/ahidat/Downloads")
 df = read.csv(file = "fao.csv", header = TRUE, sep = ";", dec = ",")
