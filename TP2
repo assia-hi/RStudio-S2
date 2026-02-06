@@ -1,3 +1,7 @@
+#notes de cours: setwd ou 
+#session -> set directory -> choisir directory et choisir dossier dans lequel on travaille
+#df = read.csv(file=, header=, sep=, dec=)
+
 setwd("C:/Users/ahidat/Downloads")
 df = read.csv(file = "fao.csv", header = TRUE, sep = ";", dec = ",")
 
@@ -45,3 +49,4 @@ View(Fr_Bel)
 #Exo 4
 
 df$part_export = df$Export_viande/df$Prod_viande
+
